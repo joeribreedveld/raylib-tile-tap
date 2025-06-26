@@ -7,7 +7,7 @@ int main() {
     const int screen_width = 400;
     const int screen_height = 600;
 
-    InitWindow(screen_width, screen_height, "KeyTap");
+    InitWindow(screen_width, screen_height, "TileTap");
 
     SetTargetFPS(60);
 
