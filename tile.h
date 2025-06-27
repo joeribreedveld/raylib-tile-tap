@@ -8,14 +8,12 @@ struct tile {
     bool clicked;
 };
 
-struct tile *tile_init();
+struct tile *tile_init(int index);
 
 void tile_update(struct tile* tile);
 
 void tile_draw(struct tile* tile);
 
-bool tile_clicked(struct tile* tile);
-
-Vector2 tile_position(struct tile* tile);
+bool tile_finished(struct tile* tile);
 
 #endif

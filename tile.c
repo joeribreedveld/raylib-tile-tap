@@ -6,11 +6,11 @@
 #define TILE_WIDTH 100
 #define TILE_HEIGHT 150
 
-struct tile* tile_init() {
-    struct tile* tile = malloc(sizeof(struct tile*));
+struct tile* tile_init(int index) {
+    struct tile* tile = malloc(sizeof(struct tile));
 
     tile->position.x = GetRandomValue(0, 3) * 100;
-    tile->position.y = -TILE_HEIGHT;
+    tile->position.y = -index * TILE_HEIGHT;
 
     return tile;
 }
@@ -24,6 +24,6 @@ void tile_draw(struct tile* tile) {
                   BLACK);
 }
 
-// bool tile_clicked(struct tile* tile) { return tile->clicked; }
-
-// Vector2 tile_position(struct tile* tile) { return tile->position; }
+bool tile_finished(struct tile* tile) {
+    return tile->position.y >= GetScreenHeight();
+}
