@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "config.h"
 #include "raylib.h"
 #include "tile.h"
-
-#define MAX_TILES 10
-#define TILE_HEIGHT 150
 
 int main() {
     const int screen_width = 400;
@@ -13,12 +11,12 @@ int main() {
 
     InitWindow(screen_width, screen_height, "TileTap");
 
-    SetTargetFPS(60);
+    SetTargetFPS(FPS);
 
     /* Tile init */
-    struct tile* tiles[MAX_TILES];
+    struct tile* tiles[N_TILES];
 
-    for (int i = 0; i < MAX_TILES; i++) {
+    for (int i = 0; i < N_TILES; i++) {
         tiles[i] = tile_init(-i * TILE_HEIGHT);
     }
 
@@ -26,14 +24,14 @@ int main() {
 
     while (!WindowShouldClose()) {
         /* Tile logic */
-        for (int i = 0; i < MAX_TILES; i++) {
+        for (int i = 0; i < N_TILES; i++) {
             tile_update(tiles[i]);
 
             if (tile_finished(tiles[i])) {
                 float latest_pos = tiles[i]->position.y;
                 free(tiles[i]);
 
-                tiles[i] = tile_init(latest_pos - TILE_HEIGHT * MAX_TILES);
+                tiles[i] = tile_init(latest_pos - TILE_HEIGHT * N_TILES);
             }
         }
 
@@ -42,7 +40,7 @@ int main() {
         ClearBackground(RAYWHITE);
 
         /* Tile draw */
-        for (int i = 0; i < MAX_TILES; i++) {
+        for (int i = 0; i < N_TILES; i++) {
             tile_draw(tiles[i]);
         }
 
