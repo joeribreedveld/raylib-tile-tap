@@ -19,7 +19,7 @@ int main() {
     struct tile* tiles[MAX_TILES];
 
     for (int i = 0; i < MAX_TILES; i++) {
-        tiles[i] = tile_init(i);
+        tiles[i] = tile_init(-i * TILE_HEIGHT);
     }
 
     float next_tile_y = 0;
@@ -30,12 +30,10 @@ int main() {
             tile_update(tiles[i]);
 
             if (tile_finished(tiles[i])) {
+                float latest_pos = tiles[i]->position.y;
                 free(tiles[i]);
 
-                next_tile_y = 6;
-
-                printf("new tile\n");
-                tiles[i] = tile_init(next_tile_y);
+                tiles[i] = tile_init(latest_pos - TILE_HEIGHT * MAX_TILES);
             }
         }
 

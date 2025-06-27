@@ -2,15 +2,15 @@
 
 #include <stdlib.h>
 
-#define SPEED 4
+#define SPEED 20
 #define TILE_WIDTH 100
 #define TILE_HEIGHT 150
 
-struct tile* tile_init(int index) {
+struct tile* tile_init(float position_y) {
     struct tile* tile = malloc(sizeof(struct tile));
 
     tile->position.x = GetRandomValue(0, 3) * 100;
-    tile->position.y = -index * TILE_HEIGHT;
+    tile->position.y = position_y;
 
     return tile;
 }

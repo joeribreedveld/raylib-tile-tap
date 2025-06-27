@@ -8,7 +8,7 @@ struct tile {
     bool clicked;
 };
 
-struct tile *tile_init(int index);
+struct tile *tile_init(float position_y);
 
 void tile_update(struct tile* tile);
 
