@@ -1,15 +1,18 @@
+#include <stdlib.h>
+#include <time.h>
+
 #include "game.h"
 #include "raylib.h"
 
 int main() {
-    struct game *game = game_init();
-
     const int screen_width = 360;
     const int screen_height = 640;
 
     InitWindow(screen_width, screen_height, "TileTap");
 
     SetTargetFPS(FPS);
+
+    struct game *game = game_init();
 
     while (!WindowShouldClose()) {
         if (game_running(game)) {
