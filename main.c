@@ -8,7 +8,7 @@ int main() {
     const int screen_width = 360;
     const int screen_height = 640;
 
-    InitWindow(screen_width, screen_height, "TileTap");
+    InitWindow(screen_width, screen_height, "Tile Tap");
 
     SetTargetFPS(FPS);
 
