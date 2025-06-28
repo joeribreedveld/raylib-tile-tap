@@ -4,6 +4,13 @@
 int main() {
     struct game *game = game_init();
 
+    const int screen_width = 360;
+    const int screen_height = 640;
+
+    InitWindow(screen_width, screen_height, "TileTap");
+
+    SetTargetFPS(FPS);
+
     while (!WindowShouldClose()) {
         if (game_running(game)) {
             game_update(game);

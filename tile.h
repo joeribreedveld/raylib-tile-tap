@@ -5,6 +5,7 @@
 
 struct tile {
     Vector2 position;
+    /* TODO: Tile enum default, clicked, missed */
     bool clicked;
 };
 

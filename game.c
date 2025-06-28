@@ -11,12 +11,7 @@
 struct game *game_init() {
     struct game *game = malloc(sizeof(struct game));
 
-    const int screen_width = 360;
-    const int screen_height = 640;
-
-    InitWindow(screen_width, screen_height, "TileTap");
-
-    SetTargetFPS(FPS);
+    /* TODO: figure out what kind of globals to use where */
 
     game->score = 0;
     game->is_running = 1;
@@ -54,6 +49,8 @@ void game_draw(struct game *game) {
     DrawText(score_string,
              (GetScreenWidth() - MeasureText(score_string, 64)) / 2, 30, 64,
              GRAY);
+
+    /* TODO: Game start and end screens */
 
     EndDrawing();
 }

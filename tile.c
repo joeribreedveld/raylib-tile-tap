@@ -16,6 +16,7 @@ struct tile *tile_init(float position_y) {
 }
 
 void tile_move(struct tile *tile) {
+    /* TODO: incrementing velocity based on time */
     tile->position.y += GetFrameTime() * 100 * SPEED;
 }
 
