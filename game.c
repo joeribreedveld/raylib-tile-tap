@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "config.h"
 #include "raylib.h"
@@ -22,15 +23,18 @@ struct game *game_init() {
 
     for (int i = 0; i < N_TILES; i++) {
         game->tiles[i] = malloc(sizeof(struct tile));
-        game->tiles[i] = tile_init(-i * TILE_HEIGHT);
+        game->tiles[i] = tile_init(-i * TILE_HEIGHT - TILE_HEIGHT);
     }
 
     return game;
 }
 
-void game_reset(struct game *game) {
-    game->score = 0;
-    game->is_running = 1;
+struct game *game_reset(struct game *game) {
+    game_free(game);
+
+    struct game *new_game = game_init();
+
+    return new_game;
 }
 
 void game_draw(struct game *game) {
@@ -38,10 +42,18 @@ void game_draw(struct game *game) {
 
     ClearBackground(RAYWHITE);
 
+    char score_string[12];
+    snprintf(score_string, sizeof(score_string), "%d", game->score);
+
     /* Tile draw */
     for (int i = 0; i < N_TILES; i++) {
         tile_draw(game->tiles[i]);
     }
+
+    /* Score draw */
+    DrawText(score_string,
+             (GetScreenWidth() - MeasureText(score_string, 64)) / 2, 30, 64,
+             GRAY);
 
     EndDrawing();
 }
@@ -92,19 +104,23 @@ void game_update(struct game *game) {
 
             if (!found) {
                 game_end(game);
+            } else {
+                tile_click(lowest);
+                game_score_increment(game);
             }
-
-            tile_click(lowest);
         }
     }
 
     /* Tile logic */
     for (int i = 0; i < N_TILES; i++) {
-        /* TODO: End game if unclicked key hits bottom */
         tile_move(game->tiles[i]);
 
         /* Tile generate continuous */
         if (tile_finished(game->tiles[i])) {
+            if (!game->tiles[i]->clicked) {
+                game_end(game);
+            }
+
             float latest_pos = game->tiles[i]->position.y;
             free(game->tiles[i]);
 
@@ -124,3 +140,5 @@ void game_free(struct game *game) {
 
     free(game);
 }
+
+void game_score_increment(struct game *game) { game->score++; }

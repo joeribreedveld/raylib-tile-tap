@@ -11,8 +11,15 @@ int main() {
 
         game_draw(game);
 
-        if (IsKeyPressed(KEY_SPACE)) {
-            break;
+        if (!game_running(game)) {
+            if (IsKeyPressed(KEY_ESCAPE)) {
+                break;
+            }
+
+            /* Restart game */
+            if (IsKeyPressed(KEY_SPACE)) {
+                game = game_reset(game);
+            }
         }
     }
 

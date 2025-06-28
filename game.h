@@ -9,7 +9,7 @@ struct game {
 
 struct game *game_init();
 
-void game_reset(struct game *game);
+struct game *game_reset(struct game *game);
 
 void game_draw(struct game *game);
 
@@ -20,3 +20,5 @@ void game_end(struct game *game);
 bool game_running(struct game *game);
 
 void game_free(struct game *game);
+
+void game_score_increment(struct game *game);
