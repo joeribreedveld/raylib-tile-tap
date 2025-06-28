@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 /* Global variable macros */
-#define SPEED 5
+#define SPEED 2
 #define FPS 200
 
 #define N_COLS 4
