@@ -1,5 +1,6 @@
 #include "tile.h"
 
+#include <math.h>
 #include <stdlib.h>
 
 #include "config.h"
@@ -15,9 +16,9 @@ struct tile *tile_init(float position_y) {
     return tile;
 }
 
-void tile_move(struct tile *tile) {
-    /* TODO: incrementing velocity based on time */
-    tile->position.y += GetFrameTime() * 100 * SPEED;
+void tile_move(struct game *game, struct tile *tile) {
+    tile->position.y +=
+        GetFrameTime() * 100 * SPEED * sqrt(time(NULL) - game->start_time) / 10;
 }
 
 void tile_draw(struct tile *tile) {

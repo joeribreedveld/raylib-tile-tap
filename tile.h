@@ -2,6 +2,7 @@
 #define TILE_H
 
 #include "raylib.h"
+#include "game.h"
 
 struct tile {
     Vector2 position;
@@ -11,7 +12,7 @@ struct tile {
 
 struct tile *tile_init(float position_y);
 
-void tile_move(struct tile* tile);
+void tile_move(struct game *game, struct tile* tile);
 
 void tile_draw(struct tile* tile);
 

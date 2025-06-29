@@ -1,5 +1,3 @@
-#include "game.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,6 +13,7 @@ struct game *game_init() {
 
     game->score = 0;
     game->is_running = 1;
+    game->start_time = time(NULL);
 
     for (int i = 0; i < N_TILES; i++) {
         game->tiles[i] = malloc(sizeof(struct tile));
@@ -110,7 +109,7 @@ void game_update(struct game *game) {
 
     /* Tile logic */
     for (int i = 0; i < N_TILES; i++) {
-        tile_move(game->tiles[i]);
+        tile_move(game, game->tiles[i]);
 
         /* Tile generate continuous */
         if (tile_finished(game->tiles[i])) {

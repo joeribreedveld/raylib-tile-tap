@@ -1,9 +1,11 @@
 #include <stdbool.h>
 #include "config.h"
+#include <time.h>
 
 struct game {
    bool is_running;
    int score;
+   time_t start_time;
    struct tile *tiles[N_TILES];
 };
 
