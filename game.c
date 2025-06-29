@@ -99,6 +99,7 @@ void game_update(struct game *game) {
             }
 
             if (!found) {
+                /* Handle wrong column click */
                 game_end(game);
             } else {
                 tile_click(lowest);
@@ -113,14 +114,18 @@ void game_update(struct game *game) {
 
         /* Tile generate continuous */
         if (tile_finished(game->tiles[i])) {
-            if (!game->tiles[i]->clicked) {
+            /* Handle game end and feedback on tile miss */
+            if (game->tiles[i]->state != CLICKED) {
+                game->tiles[i]->state = MISSED;
                 game_end(game);
             }
 
             float latest_pos = game->tiles[i]->position.y;
-            free(game->tiles[i]);
-
-            game->tiles[i] = tile_init(latest_pos - TILE_HEIGHT * N_TILES);
+            if (game->tiles[i]->state == CLICKED &&
+                game->tiles[i]->position.y >= GetScreenHeight()) {
+                free(game->tiles[i]);
+                game->tiles[i] = tile_init(latest_pos - TILE_HEIGHT * N_TILES);
+            }
         }
     }
 }

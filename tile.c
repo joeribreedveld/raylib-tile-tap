@@ -12,6 +12,7 @@ struct tile *tile_init(float position_y) {
     tile->position.x =
         (float)GetRandomValue(0, N_COLS - 1) * (float)GetScreenWidth() / N_COLS;
     tile->position.y = position_y;
+    tile->state = DEFAULT;
 
     return tile;
 }
@@ -23,22 +24,39 @@ void tile_move(struct game *game, struct tile *tile) {
 
 void tile_draw(struct tile *tile) {
     /* Draw color based on clicked state */
-    Color color = tile->clicked ? LIGHTGRAY : BLACK;
+    Color color;
+
+    switch (tile->state) {
+        case CLICKED:
+            color = LIGHTGRAY;
+            break;
+        case MISSED:
+            color = RED;
+            break;
+        case DEFAULT:
+            color = BLACK;
+            break;
+        default:
+            color = BLACK;
+            break;
+    }
 
     DrawRectangle(tile->position.x, tile->position.y, GetScreenWidth() / N_COLS,
                   TILE_HEIGHT, color);
 }
 
 bool tile_finished(struct tile *tile) {
-    return tile->position.y >= GetScreenHeight();
+    return tile->position.y >= GetScreenHeight() - TILE_HEIGHT;
 }
 
 int tile_column(struct tile *tile) {
     return tile->position.x / ((float)GetScreenWidth() / N_COLS);
 }
 
-void tile_click(struct tile *tile) { tile->clicked = true; }
+void tile_click(struct tile *tile) { tile->state = CLICKED; }
 
-bool tile_clicked(struct tile *tile) { return tile->clicked; }
+bool tile_clicked(struct tile *tile) { return tile->state == CLICKED; }
 
 Vector2 tile_position(struct tile *tile) { return tile->position; }
+
+void tile_miss(struct tile *tile) { tile->state = MISSED; }
