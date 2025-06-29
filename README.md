@@ -9,10 +9,10 @@ Piano Tiles inspired tile tapping game with keyboard controls.
 -   [x] Custom game loop
 -   [x] Miss and wrong click handles
 -   [x] Speed increments based on time
+-   [x] User error feedback
 -   [ ] Fully random tile sequence without repeats
 -   [ ] Start, end, restart and score overview
 -   [ ] Highscore tracking
--   [ ] User error feedback
 -   [ ] Modular and conventional code style
 
 ## Usage

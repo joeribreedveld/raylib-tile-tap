@@ -14,6 +14,7 @@ struct game *game_init() {
     game->score = 0;
     game->is_running = 1;
     game->start_time = time(NULL);
+    game->error_col = -1;
 
     for (int i = 0; i < N_TILES; i++) {
         game->tiles[i] = malloc(sizeof(struct tile));
@@ -38,6 +39,15 @@ void game_draw(struct game *game) {
 
     char score_string[12];
     snprintf(score_string, sizeof(score_string), "%d", game->score);
+
+    /* Col missclick user feedback */
+    if (game->error_col != -1) {
+        Color red_transparent = GetColor(0xFF000040);
+
+        DrawRectangle(game->error_col * (GetScreenWidth() / N_COLS), 0,
+                      GetScreenWidth() / N_COLS, GetScreenHeight(),
+                      red_transparent);
+    }
 
     /* Tile draw */
     for (int i = 0; i < N_TILES; i++) {
@@ -100,6 +110,7 @@ void game_update(struct game *game) {
 
             if (!found) {
                 /* Handle wrong column click */
+                game->error_col = i;
                 game_end(game);
             } else {
                 tile_click(lowest);

@@ -7,6 +7,7 @@ struct game {
    int score;
    time_t start_time;
    struct tile *tiles[N_TILES];
+   int error_col;
 };
 
 struct game *game_init();
