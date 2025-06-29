@@ -15,6 +15,11 @@ Piano Tiles inspired tile tapping game with keyboard controls.
 -   [ ] Highscore tracking
 -   [ ] Modular and conventional code style
 
+<p float="left">
+  <img width="45%" alt="Screenshot 2025-06-29 at 11 18 58" src="https://github.com/user-attachments/assets/5bfd17a7-1e41-43fc-83e9-416f949ad8d5" />
+  <img width="45%" alt="Screenshot 2025-06-29 at 11 19 31" src="https://github.com/user-attachments/assets/a4577169-912a-4536-ac8d-fc1c85447ddb" />
+</p>
+
 ## Usage
 
 Install raylib and make sure the Makefile works on your system.
