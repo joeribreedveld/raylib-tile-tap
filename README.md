@@ -31,3 +31,20 @@ After losing:
 
 -   Use SPACE to restart game
 -   Use ESCAPE to quit game
+
+## Improvements
+
+-   Better usage of DRY principle.
+-   game->is_running can be combined with game->start_time, functionality wise.
+-   More modular abstraction with helper functions.
+-   Full code documentation.
+
+## Learned
+
+-   Raylib basics
+-   Simple applied math
+-   C program architecture
+-   Custom game loops
+-   Problem solving
+
+Made without generative AI.
